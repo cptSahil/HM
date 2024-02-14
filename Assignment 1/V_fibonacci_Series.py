@@ -1,7 +1,8 @@
 def fibonacci(n):
-    num1, num2 = 0, 1
+    num1, num2 = 0, 1 # Initialize the first two numbers in the sequence
     count = 0
     fib = []
+    
     if n <= 0:
         return "Please enter a positive integer!"
     elif n == 1:
@@ -9,7 +10,7 @@ def fibonacci(n):
     else:
         while count < n:
             fib.append(num1)
-            nth = num1 + num2 
+            nth = num1 + num2 # Compute the next number in the sequence
             num1 = num2
             num2 = nth
             count += 1
