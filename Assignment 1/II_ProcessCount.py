@@ -1,13 +1,14 @@
 import psutil
 import csv
 
-# Get all processes
-processes = psutil.process_iter()
 processCount = {}
 
+# Get all processes
+processes = psutil.process_iter()
+
 # Iterate through each process
-for process in processes:
-   processName = process.name()
+for proc in processes:
+   processName = proc.name()
    processCount[processName] = processCount.get(processName, 0) + 1
    
 # Save process counts to a CSV file

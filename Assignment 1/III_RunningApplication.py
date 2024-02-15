@@ -1,11 +1,13 @@
 import psutil
 
 # Define a function to count the number of running instances of a specified process name
-def count_running_instances(processName):
+def Instances(processName):
    count = 0 # initalize the count variable
 
+   runningApplications = psutil.process_iter(['name'])
+
    # Iterate through each Process in monitor
-   for proc in psutil.process_iter(['name']):
+   for proc in runningApplications:
        if proc.info['name'] == processName:
            count += 1
 
@@ -21,7 +23,7 @@ def monitorApplications():
         maxInstances = app['maxInstances']
 
          # Count the number of running instances of the application
-        runningInstances = count_running_instances(processName)
+        runningInstances = Instances(processName)
         
         # If the number of running instances exceeds the maximum allowed instances, print a warning message
         if runningInstances > maxInstances:
