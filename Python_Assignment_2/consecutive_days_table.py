@@ -2,8 +2,10 @@
     Importing the the necessary libraries to run the program.
 """
 from tabulate import tabulate
+from Python_Assignment_3.solution1and2.logging_and_time_decorator import log_execution_time
 import week_detail
 
+@log_execution_time
 def consecutive_day_table_form():
     """
         function to store the data in the form of table.

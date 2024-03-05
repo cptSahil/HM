@@ -1,0 +1,9 @@
+employees_data get_top_salary_employee 2024-03-05 18:01:12 {}
+Execution time: 0.1983320713043213 seconds
+
+employees_data get_top_salary_business_unit 2024-03-05 18:01:12 {}
+Execution time: 0.01211094856262207 seconds
+
+employees_data get_top_salary_employee_in_each_business_unit 2024-03-05 18:01:12 {}
+Execution time: 0.011994600296020508 seconds
+

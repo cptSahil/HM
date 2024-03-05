@@ -1,0 +1,15 @@
+__main__ main_data 2024-03-05 15:48:15 {}
+Execution time: 0.009989738464355469 seconds
+
+__main__ aggregate_employee_data 2024-03-05 15:50:54 {}
+Execution time: 0.0029768943786621094 seconds
+
+__main__ delete_employee_by_name 2024-03-05 16:12:14 {}
+Execution time: 14.230275392532349 seconds
+
+__main__ hike 2024-03-05 16:15:36 {}
+Execution time: 21.108160734176636 seconds
+
+__main__ get_character_tuples 2024-03-05 16:18:19 {}
+Execution time: 0.0 seconds
+

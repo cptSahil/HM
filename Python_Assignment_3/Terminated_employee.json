@@ -1,0 +1,17 @@
+[
+    {
+        "EMP ID ": "754d3ae5",
+        "EMP NAME": "Karen Johnson",
+        "EMP EMAIL": "patrickharris@example.org",
+        "Business Unit": "PP",
+        "Salary": 33269.97
+    },
+    {
+        "EMP ID ": "b7c6c00f",
+        "EMP NAME": "Todd Gentry",
+        "EMP EMAIL": "robinsonandrew@example.com",
+        "Business Unit": "Operations",
+        "Salary": 64212.6
+    }
+    
+]
