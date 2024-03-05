@@ -13,11 +13,11 @@
 - The README.md file in each folder also includes usage instructions for running the code and executing the functions or scripts provided.
 
 ## Assignment List
-1. **Assignment 1: Introduction to Python**
+1. **Assignment 1:**
   - This assignment consists of several modules that perform different tasks related to running process their instance and some basic code.
-2. **Assignment 2: Data Manipulation with Pandas**
+2. **Assignment 2:**
   - This assignment consists of several modules that perform different tasks related to processing and analyzing data.
-3. **Assignment 3: Decorators and Data Analysis**
+3. **Assignment 3:**
   - Description: This assignment explores decorators, data validation, and data analysis tasks.
   - Modules: logging_and_time_decorator.py, validating_decorator.py, employee_details.py, aggregate_emp_details.py, delete_emp_details.py, hiked_salary.py
 
