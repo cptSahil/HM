@@ -1,12 +1,13 @@
 """
     Importing the the necessary libraries to run the program
 """
+
+from Python_Assignment_3.solution1and2.logging_and_time_decorator import log_execution_time
 import pandas as pd
 import week_detail
 import consecutive_days
 import character_occurrence
 import employees_data
-from Python_Assignment_3.solution1and2.logging_and_time_decorator import log_execution_time
 
 @log_execution_time
 def create_excel_file():

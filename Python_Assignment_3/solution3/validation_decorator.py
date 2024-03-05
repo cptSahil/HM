@@ -14,7 +14,7 @@ def validate_range(min_val, max_val):
         def wrapper(*args, **kwargs):
             if len(args)>0 and min_val<= args[0] <= max_val:
                 return func(*args, **kwargs)
-            else:
-                raise ValueError(f"Argument must be in range of [{min_val}, {max_val}]!")
+            # else:
+            raise ValueError(f"Argument must be in range of [{min_val}, {max_val}]!")
         return wrapper
     return decorator

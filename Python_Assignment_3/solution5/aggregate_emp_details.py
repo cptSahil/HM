@@ -14,7 +14,7 @@ def aggregate_employee_data():
     """
 
     # Load data from the existing JSON file
-    with open('Employee_Personal_Details.json', 'r',encoding='utf-8') as file:
+    with open('..solution4/Employee_Personal_Details.json', 'r',encoding='utf-8') as file:
         emp_data = json.load(file)
 
     business_units = {}
