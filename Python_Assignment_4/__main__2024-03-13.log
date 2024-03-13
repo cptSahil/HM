@@ -1,0 +1,18 @@
+__main__ write_employee_to_file 2024-03-13 16:37:55 {}
+Execution time: 0.0009505748748779297 seconds
+
+__main__ write_employees_to_file 2024-03-13 16:37:55 {}
+Execution time: 0.0010001659393310547 seconds
+
+__main__ write_employees_to_file 2024-03-13 16:37:55 {}
+Execution time: 0.0009984970092773438 seconds
+
+__main__ write_employee_to_file 2024-03-13 16:38:53 {}
+Execution time: 0.002010822296142578 seconds
+
+__main__ write_employees_to_file 2024-03-13 16:38:53 {}
+Execution time: 0.0010018348693847656 seconds
+
+__main__ write_employees_to_file 2024-03-13 16:38:53 {}
+Execution time: 0.0020034313201904297 seconds
+
