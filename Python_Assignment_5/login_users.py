@@ -65,16 +65,7 @@ class LoginManager:                               #pylint: disable=R0903
             for row in users.iter_rows(min_row=2, values_only=True):
                 user_id, username, password = row
                 self.browser_manager.driver.get(self.url)  # Navigate to the login page
-
-                # username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
-                # password_field = self.browser_manager.driver.find_element(By.ID, "password")
-
-                # username_field.clear()
-                # password_field.clear()
-
-                # username_field.send_keys(username)
-                # password_field.send_keys(password)
-                # password_field.send_keys(Keys.RETURN)
+                
                 login_manager = Login(self.browser_manager,username,password)
                 login_manager.login()
 

@@ -16,6 +16,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from login import Login
+from checkout_information import CheckoutInfo
 
 class OrderPlacer:                      #pylint: disable=R0903
     """
@@ -47,7 +48,8 @@ class OrderPlacer:                      #pylint: disable=R0903
             row_index = 2  # Start from the second row where data begins
 
             for row in order_sheet.iter_rows(min_row=row_index, values_only=True):
-                username, product, quantity, *_ = row
+                username, product, quantity, price, *_ = row
+                print(username,product,quantity,price)
 
                 self.browser_manager.setup_browser(self.url)
                 self.browser_manager.driver.implicitly_wait(3)
@@ -67,6 +69,8 @@ class OrderPlacer:                      #pylint: disable=R0903
                 cart_icon.click()
                 self.browser_manager.driver.implicitly_wait(5)
                 product_in_cart = self.browser_manager.driver.find_element(By.XPATH,"//div[@class='inventory_item_name']").text     #pylint: disable=C0301
+                total_cost_in_cart = float(self.browser_manager.driver.find_element(By.CLASS_NAME,"inventory_item_price").text)     #pylint: disable=C0301
+                # price = float(price)
 
                 cart_quantity = self.browser_manager.driver.find_element(By.CLASS_NAME, "cart_quantity")    #pylint: disable=C0301
                 cart_count = int(cart_quantity.text)
@@ -75,13 +79,8 @@ class OrderPlacer:                      #pylint: disable=R0903
                 checkout_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "checkout_button")    #pylint: disable=C0301
                 checkout_button.click()
 
-                first_name_field = self.browser_manager.driver.find_element(By.ID, "first-name")
-                last_name_field = self.browser_manager.driver.find_element(By.ID, "last-name")
-                postal_code_field = self.browser_manager.driver.find_element(By.ID, "postal-code")
-
-                first_name_field.send_keys("John")
-                last_name_field.send_keys("Doe")
-                postal_code_field.send_keys("12345")
+                checkout_manager = CheckoutInfo(self.browser_manager)
+                checkout_manager.personal_info()
 
                 continue_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "cart_button")    #pylint: disable=C0301
                 continue_button.click()
@@ -89,14 +88,19 @@ class OrderPlacer:                      #pylint: disable=R0903
                 finish_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "cart_button")  #pylint: disable=C0301
                 finish_button.click()
 
+                cart_icon2 = WebDriverWait(self.browser_manager.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "shopping_cart_container"))) #pylint: disable=C0301
+                cart_icon2.click()
+                cart_items = self.browser_manager.driver.find_elements(By.CLASS_NAME, "inventory_item_name")        #pylint: disable=C0301
+                item_still_in_cart = any(product in item.text for item in cart_items)
+
                 print(product_in_cart)
-                if cart_count == int(quantity):
-                    if product_in_cart == product:
+                if cart_count == int(quantity) and product_in_cart == product and total_cost_in_cart == float(price):  #pylint: disable=C0301
+                    if item_still_in_cart:
+                        order_sheet.cell(row=row_index, column=5, value="Failure")
+                        print("Order status updated to Failure")
+                    else:
                         order_sheet.cell(row=row_index, column=5, value="Success")
                         print("Order status updated to Success")
-                else:
-                    order_sheet.cell(row=row_index, column=5, value="Failure")
-                    print("Order status updated to Failure")
 
                 workbook.save(self.filename)
                 self.browser_manager.driver.implicitly_wait(5)

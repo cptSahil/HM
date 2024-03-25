@@ -39,9 +39,9 @@ create_order_manager = CreateOrderDetailsFile(FILENAME)
 create_order_manager.save_order_details()
 
 order_details_data = [['standard_user','Sauce Labs Bolt T-Shirt',1,15.99],
-                      ['problem_user','Sauce Labs Bike Light',1,9.99],
-                      ['standard_user','Sauce Labs Bike Light',1,9.99],
-                      ['problem_user','Sauce Labs Onesie',1,7.99]]
+                        ['problem_user','Sauce Labs Bike Light',1,9.99],
+                        ['standard_user','Sauce Labs Bike Light',1,9.99],
+                        ['problem_user','Sauce Labs Onesie',1,7.99]]
 
 create_order_manager.add_order_data(order_details_data)
 browser_manager.close_browser()

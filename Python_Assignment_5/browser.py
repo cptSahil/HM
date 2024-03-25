@@ -1,6 +1,4 @@
 """
-File: browser_controller.py
-
 Description:
 This file contains a BrowserManager class that controls web browsers based on the provided 
 browser name.
@@ -30,7 +28,7 @@ class BrowserManager:
         Parameters:
         - url (str): The URL to open in the browser.
         - browser (str): The type of browser to use (default is 'chrome').
-                         Supported values: 'chrome', 'edge', 'firefox'.
+                        Supported values: 'chrome', 'edge', 'firefox'.
         """
         if browser.lower() == 'chrome':
             self.driver = webdriver.Chrome()
