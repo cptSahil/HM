@@ -1,0 +1,145 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import openpyxl
+ 
+# Initialize Chrome webdriver
+driver = webdriver.Chrome()
+ 
+# Function to retrieve user credentials and store them in Excel
+def retrieve_user_credentials():
+    driver.get("https://www.saucedemo.com/v1/")
+   
+    # Find all elements with class 'login_credentials'
+    users = driver.find_elements(By.CLASS_NAME, "login_credentials")
+    passwords = driver.find_elements(By.CLASS_NAME, "login_password")
+
+    credentials_sheet = workbook.create_sheet("User credentials")
+    credentials_sheet.append(["User ID", "User Name", "Password"])
+
+    idx = 1
+
+    for user, password in zip(users,passwords):
+        # Split the text of each div element to extract user name and password
+        user_info = user.text.split("\n")
+        pass_info = password.text.split("\n")
+        # Append User ID and Password directly
+        # credentials_sheet.append([user_info[1]])
+        # Append each element of user_info[1:] to the same column 'User Name' in different rows
+        for info,info2 in zip(user_info[1:],pass_info[1:]*len(user_info[1:])):
+            credentials_sheet.append([idx, info, info2])
+            idx += 1
+    workbook.save(filename)
+ 
+# Initialize Excel workbook
+filename = "saucedemo_credentials.xlsx"
+workbook = openpyxl.Workbook()
+ 
+# Execute tasks
+retrieve_user_credentials()
+ 
+# Close the browser
+driver.quit()
+
+
+// retrieve_user_credentials
+
+# # from selenium import webdriver
+# from selenium.webdriver.common.by import By
+
+# # from open_close import BrowserManager
+# import openpyxl
+
+# class CredentialsRetriever:
+
+#     def __init__(self, url, filename, browser_manager):
+#         self.url = url
+#         self.filename = filename
+#         self.browser_manager = browser_manager
+#         # self.driver = webdriver.Chrome()
+#         self.workbook = openpyxl.Workbook()
+
+#     def retrieve_user_credentials(self):
+#         self.browser_manager.setup_browser(self.url)
+#         users = self.browser_manager.driver.find_elements(By.CLASS_NAME, "login_credentials")
+#         passwords = self.browser_manager.driver.find_elements(By.CLASS_NAME, "login_password")
+
+#         credentials_sheet = self.workbook.active
+#         credentials_sheet.title = "User credentials"
+#         credentials_sheet.append(["User ID", "User Name", "Password"])
+
+#         idx = 1
+
+#         for user, password in zip(users, passwords):
+#             user_info = user.text.split("\n")
+#             pass_info = password.text.split("\n")
+#             for info, info2 in zip(user_info[1:], pass_info[1:]*len(user_info[1:])):
+#                 credentials_sheet.append([idx, info, info2])
+#                 idx += 1
+
+#         self.workbook.save(self.filename)
+
+
+//login
+
+# import pandas as pd
+# import openpyxl
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.keys import Keys
+# import time
+
+
+# class LoginManager:
+
+#     def __init__(self, url, filename, browser_manager):
+#         self.url = url
+#         self.filename = filename
+#         self.browser_manager = browser_manager
+
+#     def login_with_users(self):
+#         self.browser_manager.setup_browser(self.url)
+#         try:
+#             workbook = openpyxl.load_workbook(self.filename)
+#             login_sheet = workbook.create_sheet("Login")
+#             login_sheet.append(["User ID", "Login Message"])
+#             users = workbook["User_credentials"]
+
+#             data = []
+#             for row in users.iter_rows(min_row=2, values_only=True):
+#                 user_id, username, password = row
+#                 self.browser_manager.driver.get(self.url)  # Navigate to the login page
+
+#                 username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
+#                 password_field = self.browser_manager.driver.find_element(By.ID, "password")
+
+#                 username_field.clear()
+#                 password_field.clear()
+
+#                 username_field.send_keys(username)
+#                 password_field.send_keys(password)
+#                 password_field.send_keys(Keys.RETURN)
+
+#                 initial_url = self.browser_manager.driver.current_url
+
+#                 if self.browser_manager.driver.current_url == initial_url:
+#                     pass
+#                 else:
+#                     self.browser_manager.driver.execute_script("window.history.go(-1)")
+
+#                 error_message = ""
+#                 try:
+#                     if self.browser_manager.driver.find_elements(By.XPATH, "//h3"):
+#                         error_message = self.browser_manager.driver.find_element(By.XPATH, "//h3").text
+#                 except():
+#                     # error_message = "No error message found"
+#                     pass
+
+#                 data.append([user_id, error_message])
+#                 # self.browser_manager.driver.execute_script("window.history.go(-1)")
+
+
+#             df = pd.DataFrame(data, columns=["User ID", "Login Message"])
+#             with pd.ExcelWriter(self.filename, engine='openpyxl', mode='a') as writer:
+#                 df.to_excel(writer, sheet_name='Login', index=False)
+
+#         finally:
+#             self.browser_manager.driver.quit()
