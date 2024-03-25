@@ -24,13 +24,8 @@ Dependencies:
 
 import pandas as pd
 import openpyxl
-import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.common.exceptions import TimeoutException
+from login import Login
 
 class LoginManager:                               #pylint: disable=R0903
     """
@@ -71,17 +66,17 @@ class LoginManager:                               #pylint: disable=R0903
                 user_id, username, password = row
                 self.browser_manager.driver.get(self.url)  # Navigate to the login page
 
-                username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
-                password_field = self.browser_manager.driver.find_element(By.ID, "password")
+                # username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
+                # password_field = self.browser_manager.driver.find_element(By.ID, "password")
 
-                username_field.clear()
-                password_field.clear()
+                # username_field.clear()
+                # password_field.clear()
 
-                username_field.send_keys(username)
-                password_field.send_keys(password)
-                # time.sleep(5)
-                password_field.send_keys(Keys.RETURN)
-                # time.sleep(5)
+                # username_field.send_keys(username)
+                # password_field.send_keys(password)
+                # password_field.send_keys(Keys.RETURN)
+                login_manager = Login(self.browser_manager,username,password)
+                login_manager.login()
 
                 initial_url = self.browser_manager.driver.current_url
 
@@ -89,19 +84,16 @@ class LoginManager:                               #pylint: disable=R0903
                     pass
                 else:
                     self.browser_manager.driver.execute_script("window.history.go(-1)")
-                time.sleep(5)
+                self.browser_manager.driver.implicitly_wait(5)
 
                 error_message = ""
                 try:
                     if self.browser_manager.driver.find_elements(By.XPATH, "//h3"):
-                        error_message = self.browser_manager.driver.find_element(By.XPATH, "//h3").text
+                        error_message = self.browser_manager.driver.find_element(By.XPATH, "//h3").text #pylint: disable=C0301
                 except():
-                    # error_message = "No error message found"
                     pass
 
                 data.append([user_id, error_message])
-                # self.browser_manager.driver.execute_script("window.history.go(-1)")
-
 
             df = pd.DataFrame(data, columns=["User ID", "Login Message"])
             with pd.ExcelWriter(self.filename, engine='openpyxl', mode='a') as writer:

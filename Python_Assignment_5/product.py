@@ -16,7 +16,7 @@ Dependencies:
 """
 import pandas as pd
 from selenium.webdriver.common.by import By
-# from login import Login
+from login import Login
 
 class ProductDetailsRetriever:                      #pylint: disable=R0903
     """
@@ -50,13 +50,15 @@ class ProductDetailsRetriever:                      #pylint: disable=R0903
 
             # login_user = Login(username,password)
             # login_user.login()
-            username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
-            password_field = self.browser_manager.driver.find_element(By.ID, "password")
-            login_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "btn_action")
+            # username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
+            # password_field = self.browser_manager.driver.find_element(By.ID, "password")
+            # login_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "btn_action")
 
-            username_field.send_keys("standard_user")
-            password_field.send_keys("secret_sauce")
-            login_button.click()
+            # username_field.send_keys("standard_user")
+            # password_field.send_keys("secret_sauce")
+            # login_button.click()
+            login_manager = Login(self.browser_manager,"standard_user","secret_sauce")
+            login_manager.login()
 
             self.browser_manager.driver.implicitly_wait(5)
 

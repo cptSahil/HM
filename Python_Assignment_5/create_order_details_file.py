@@ -66,4 +66,4 @@ class CreateOrderDetailsFile:                   #pylint: disable=R0903
                 order_sheet.append(order_data)
             workbook.save(self.filename)
         except FileNotFoundError:
-            print("Excel file not found. Please save order details first using save_order_details method.")
+            print("Excel file not found.")
