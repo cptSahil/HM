@@ -48,6 +48,7 @@ The script uses several classes and functions from different modules to accompli
 - `create_order_details_file`: Contains the `CreateOrderDetailsFile` class to create an order details file.
 - `login`: Contains the `Login` class to use the comman login method according to the need.
 - `main`: It is the main file to automate the work and run all other functionalities together.
+-  `checkout_information` : Contains the `CheckoutInfo` class that contains the user details for the checkout the product. 
 
 ## Classes
 
@@ -57,14 +58,18 @@ The script uses several classes and functions from different modules to accompli
 - `ProductDetailsRetriever`: Manages the retrieval of product details from a web page.
 - `CreateOrderDetailsFile`: Manages the creation of an order details file.
 - `Login`: Manages the login the user using the  username and password.
+- `CheckoutInfo` : Stores the information related to users for checkout. 
 
 ## Functions/Methods
 
+- `setup_browser` : Function use to setup the open selected browser and get to the url.
+- `close_browser` : Function use to terminate the current running browser. 
 - `retrieve_user_credentials`: Retrieves user credentials from the web page and saves them to an Excel file.
 - `login_with_users`: Logs in to the web page with user credentials.
 - `login_and_retrieve_product_details`: Logs in to the web page and retrieves product details.
 - `save_order_details`: Creates an order details file.
 - `login`: Logged in the website using user credentials.
+- `personal_info` : Fill the user's personal info like first name, last name etc
 
 ## Dependencies
 
