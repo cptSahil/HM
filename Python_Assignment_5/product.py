@@ -27,6 +27,9 @@ class ProductDetailsRetriever:                      #pylint: disable=R0903
     - url (str): The URL of the web page.
     - filename (str): The name of the Excel file to store product details.
     """
+    user_id = "standard_user"
+    password = "secret_sauce"
+    product_detail = "inventory_item"
 
     def __init__(self, browser_manager, url, filename):
         """
@@ -47,22 +50,12 @@ class ProductDetailsRetriever:                      #pylint: disable=R0903
         """
         try:
             self.browser_manager.setup_browser(self.url)
-
-            # login_user = Login(username,password)
-            # login_user.login()
-            # username_field = self.browser_manager.driver.find_element(By.ID, "user-name")
-            # password_field = self.browser_manager.driver.find_element(By.ID, "password")
-            # login_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "btn_action")
-
-            # username_field.send_keys("standard_user")
-            # password_field.send_keys("secret_sauce")
-            # login_button.click()
-            login_manager = Login(self.browser_manager,"standard_user","secret_sauce")
+            login_manager = Login(self.browser_manager,self.user_id,self.password)
             login_manager.login()
 
             self.browser_manager.driver.implicitly_wait(5)
 
-            products = self.browser_manager.driver.find_elements(By.CLASS_NAME, "inventory_item")
+            products = self.browser_manager.driver.find_elements(By.CLASS_NAME, self.product_detail)
             product_data = {"Product ID": [], "Product Name": [], "Description": [], "Price": []}
 
             for idx, product in enumerate(products, start=1):

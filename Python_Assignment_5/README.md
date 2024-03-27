@@ -53,7 +53,7 @@ The script uses several classes and functions from different modules to accompli
 ## Classes
 
 - `CredentialsRetriever`: Manages the retrieval of user credentials from a web page.
-- `LoginManager`: Manages the login process with user credentials.
+- `DataManager`: Manages the login process with user credentials.
 - `BrowserManager`: Manages the web browser.
 - `ProductDetailsRetriever`: Manages the retrieval of product details from a web page.
 - `CreateOrderDetailsFile`: Manages the creation of an order details file.

@@ -16,7 +16,7 @@ Dependencies:
 - pandas: For data manipulation and Excel file handling.
 - selenium.webdriver.common.by.By: For locating elements on the web page.
 """
-
+# import os
 import pandas as pd
 from selenium.webdriver.common.by import By
 
@@ -30,6 +30,8 @@ class CredentialsRetriever:                                      #pylint: disabl
     - browser_manager: An instance of BrowserManager to control the web browser.
     - credentials_data (dict): Dictionary to store user credentials data.
     """
+    users_data = "login_credentials"
+    password_data = "login_password"
 
     def __init__(self, url, filename, browser_manager):
         """
@@ -50,8 +52,8 @@ class CredentialsRetriever:                                      #pylint: disabl
         Retrieve user credentials from the web page and save them to an Excel file.
         """
         self.browser_manager.setup_browser(self.url)
-        users = self.browser_manager.driver.find_elements(By.CLASS_NAME, "login_credentials")
-        passwords = self.browser_manager.driver.find_elements(By.CLASS_NAME, "login_password")
+        users = self.browser_manager.driver.find_elements(By.CLASS_NAME, self.users_data)
+        passwords = self.browser_manager.driver.find_elements(By.CLASS_NAME, self.password_data)
 
         for user, password in zip(users, passwords):
             user_info = user.text.split("\n")

@@ -27,7 +27,7 @@ import openpyxl
 from selenium.webdriver.common.by import By
 from login import Login
 
-class LoginManager:                               #pylint: disable=R0903
+class DataManager:                               #pylint: disable=R0903
     """
     A class to manage user login operations using Selenium.
 
@@ -36,6 +36,7 @@ class LoginManager:                               #pylint: disable=R0903
     - filename (str): The name of the Excel file to store login results.
     - browser_manager: An instance of BrowserManager to control the web browser.
     """
+    error_msg_locator = "//div[@class='login-box']/form/h3"
 
     def __init__(self, url, filename, browser_manager):
         """
@@ -64,8 +65,8 @@ class LoginManager:                               #pylint: disable=R0903
             data = []
             for row in users.iter_rows(min_row=2, values_only=True):
                 user_id, username, password = row
-                self.browser_manager.driver.get(self.url)  # Navigate to the login page
-                
+                self.browser_manager.driver.get(self.url)
+
                 login_manager = Login(self.browser_manager,username,password)
                 login_manager.login()
 
@@ -77,10 +78,10 @@ class LoginManager:                               #pylint: disable=R0903
                     self.browser_manager.driver.execute_script("window.history.go(-1)")
                 self.browser_manager.driver.implicitly_wait(5)
 
-                error_message = ""
+                error_message = "Login Successfully!!"
                 try:
-                    if self.browser_manager.driver.find_elements(By.XPATH, "//h3"):
-                        error_message = self.browser_manager.driver.find_element(By.XPATH, "//h3").text #pylint: disable=C0301
+                    if self.browser_manager.driver.find_elements(By.XPATH, self.error_msg_locator):
+                        error_message = self.browser_manager.driver.find_element(By.XPATH, self.error_msg_locator).text #pylint: disable=C0301
                 except():
                     pass
 

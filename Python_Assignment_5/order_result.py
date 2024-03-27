@@ -17,6 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from login import Login
 from checkout_information import CheckoutInfo
+from capture_screenshot import Screenshot
 
 class OrderPlacer:                      #pylint: disable=R0903
     """
@@ -70,11 +71,9 @@ class OrderPlacer:                      #pylint: disable=R0903
                 self.browser_manager.driver.implicitly_wait(5)
                 product_in_cart = self.browser_manager.driver.find_element(By.XPATH,"//div[@class='inventory_item_name']").text     #pylint: disable=C0301
                 total_cost_in_cart = float(self.browser_manager.driver.find_element(By.CLASS_NAME,"inventory_item_price").text)     #pylint: disable=C0301
-                # price = float(price)
 
                 cart_quantity = self.browser_manager.driver.find_element(By.CLASS_NAME, "cart_quantity")    #pylint: disable=C0301
                 cart_count = int(cart_quantity.text)
-                print("Cart count:", cart_count)
 
                 checkout_button = self.browser_manager.driver.find_element(By.CLASS_NAME, "checkout_button")    #pylint: disable=C0301
                 checkout_button.click()
@@ -96,6 +95,8 @@ class OrderPlacer:                      #pylint: disable=R0903
                 print(product_in_cart)
                 if cart_count == int(quantity) and product_in_cart == product and total_cost_in_cart == float(price):  #pylint: disable=C0301
                     if item_still_in_cart:
+                        screenshot_manager = Screenshot(self.browser_manager)
+                        screenshot_manager.capture()
                         order_sheet.cell(row=row_index, column=5, value="Failure")
                         print("Order status updated to Failure")
                     else:
