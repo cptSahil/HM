@@ -25,7 +25,7 @@ Dependencies:
 import pandas as pd
 import openpyxl
 from selenium.webdriver.common.by import By
-from login import Login
+from tasks.login import Login
 
 class DataManager:                               #pylint: disable=R0903
     """

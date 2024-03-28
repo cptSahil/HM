@@ -36,10 +36,6 @@ class Login:                                #pylint: disable=R0903
         """
         Method to log in with the provided username and password.
 
-        Args:
-            username (str): The username to log in with.
-            password (str): The password corresponding to the username.
-
         This method finds the username, password fields, and login button on the webpage,
         fills in the provided credentials, and clicks on the login button.
         """

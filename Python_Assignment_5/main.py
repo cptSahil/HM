@@ -11,12 +11,12 @@ Modules:
 - create_order_details_file: Contains the CreateOrderDetailsFile class to create an order details.
 - update_file: Contains the UpdateFile class to update the order details file.
 """
-from retrieve_data import CredentialsRetriever
-from users_data import DataManager
-from browser import BrowserManager
-from product import ProductDetailsRetriever
-from create_order_details_file import CreateOrderDetailsFile
-from order_result import OrderPlacer
+from tasks.retrieve_data import CredentialsRetriever
+from tasks.users_data import DataManager
+from tasks.browser import BrowserManager
+from tasks.product import ProductDetailsRetriever
+from tasks.create_order_details_file import CreateOrderDetailsFile
+from tasks.order_result import OrderPlacer
 
 URL = "https://www.saucedemo.com/v1/"
 FILENAME = "saucedemo_credentials.xlsx"

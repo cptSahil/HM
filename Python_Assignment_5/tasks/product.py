@@ -16,7 +16,7 @@ Dependencies:
 """
 import pandas as pd
 from selenium.webdriver.common.by import By
-from login import Login
+from tasks.login import Login
 
 class ProductDetailsRetriever:                      #pylint: disable=R0903
     """

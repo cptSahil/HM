@@ -15,9 +15,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from login import Login
-from checkout_information import CheckoutInfo
-from capture_screenshot import Screenshot
+from tasks.login import Login
+from tasks.checkout_information import CheckoutInfo
+from tasks.capture_screenshot import Screenshot
 
 class OrderPlacer:                      #pylint: disable=R0903
     """
